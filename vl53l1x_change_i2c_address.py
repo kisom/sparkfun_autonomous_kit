@@ -179,7 +179,7 @@ while True:
 		ToF = qwiic.QwiicVL53L1X(device_address)
 
 		try:
-			ToF.SensorInit()
+			ToF.sensor_init()
 		except Exception as e:
 			if e == OSError or e == IOError:
 				print("Issue connecting to device.")
@@ -221,7 +221,7 @@ while True:
 				exit()
 
 		try:
-			ToF.SetI2CAddress(new_address)
+			ToF.set_i2c_address(new_address)
 		except Exception as e:
 			if e == OSError or e == IOError:
 				print("Issue connecting to device.")
@@ -241,11 +241,11 @@ test = input("Want to test device? (y or n)")
 if test == "y" or test == "Y":
 	while True:
 		try:
-			ToF.StartRanging()						 # Write configuration bytes to initiate measurement
+			ToF.start_ranging()						 # Write configuration bytes to initiate measurement
 			time.sleep(.005)
-			distance = ToF.GetDistance()	 # Get the result of the measurement from the sensor
+			distance = ToF.get_distance()	 # Get the result of the measurement from the sensor
 			time.sleep(.005)
-			ToF.StopRanging()
+			ToF.stop_ranging()
 
 			distanceInches = distance / 25.4
 			distanceFeet = distanceInches / 12.0
